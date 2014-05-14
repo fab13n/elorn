@@ -1,4 +1,5 @@
 ---
+published: false
 layout: post
 title:  "[EN] Raspberry Pi + Mihini, controlling an off-the-grid electrical installation, part II"
 date:   2014-05-12 22:35:00
