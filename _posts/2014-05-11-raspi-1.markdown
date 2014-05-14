@@ -100,10 +100,10 @@ _Wiring scheme_
 Operating System
 ----------------
 
-There are several OS distributions for Raspberry. I chose [Raspbian]()
-because 1/ I've been using Debian derivatives for more than a decade
-and 2/ [Mihini](http://www.eclipse.org/mihini) is ported and tested on
-it.
+There are several OS distributions for Raspberry. I chose
+[Raspbian](http://www.raspbian.org/) because 1/ I've been using Debian
+derivatives for more than a decade and 2/
+[Mihini](http://www.eclipse.org/mihini) is ported and tested on it.
 
 Software Setup
 --------------
@@ -126,30 +126,53 @@ Time to check if we see something on the serial port:
 $ ssh pi@pi
 $ stty -F /dev/ttyAMA0 speed 19200 cs8 -icrnl -ixon -icanon
 $ cat /dev/ttyAMA0
-...TODO...
+V	26717
+I	0
+CE	0
+SOC	1000
+TTG	-1
+Alarm	OFF
+Relay	OFF
+AR	0
+BMV	600S
+FW	212
+Checksum	?
+H1	0
+H2	0
+H3	0
+H4	0
+H5	0
+H6	0
+H7	26708
+H8	26718
+H9	0
+H10	1
+H11	0
+H12	0
+Checksum	?
 ^C
 $ _
 {% endhighlight %}
 
 Great :) Moreover, the protocol is pretty readable, and
-[fully documented]() by Victron. Time to write a small program to
-digests this.
+[fully documented](http://www.victronenergy.com/upload/documents/VE.Direct_Protocol.pdf)
+by Victron. Time to write a small program to digests this.
 
 Mihini
 ------
 
 [Eclipse Mihini](http://www.eclipse.org/mihini) is a development
 framework, primarily targetting embedded Linux systems, which allows
-to easily create and deploy M2M applications in [Lua](). Since I've
-participated a lot in its architecture and implementation, the choice
-was obvious, besides the many inherent qualities of that system--if I
-may say so.
+to easily create and deploy M2M applications in
+[Lua](http://www.lua.org). Since I've participated a lot in its
+architecture and implementation, the choice was obvious, besides the
+many inherent qualities of that system--if I may say so.
 
-[Porting Mihini to a Raspberry]() isn't difficult, and is thoroughly
-documented on Internet. As a bonus, and unsurprisingly for an Eclipse
-product, it has an excellent support from the IDE, including
-autocompletion, out-of-the box remote debugging, application
-deployment etc.
+[Porting Mihini to a Raspberry](https://wiki.eclipse.org/Mihini/Cross_Compilation)
+isn't difficult, and is thoroughly documented on Internet. As a bonus,
+and unsurprisingly for an Eclipse product, it has an excellent support
+from the IDE, including autocompletion, out-of-the box remote
+debugging, application deployment etc.
 
 Data acquisition
 ----------------
@@ -167,7 +190,7 @@ acquire serial data at full speed; then, we'll have all the time we
 want to process / consolidate / report all this. The first idea that
 comes to mind would be to write data acquisition in C.
 
-But on second thoughs, the best code is the one you don't have to
+But on second thought, the best code is the one you don't have to
 write, and there's a fairly well established program that reads data
 from a device on Unix, namely `cat`. All we need is to put a timeout
 to stop reading after a while: there's another Unix utility which
@@ -177,7 +200,7 @@ chatter in the file of my choice. Within Lua, all I have to do is
 perform `os.execute("timeout 1.5s cat /dev/ttyAMA0 > somefile")`, then
 take all the time I want to read back the result from the file. I'm
 glossing over some details, but they're included and commented in the
-[source code]().
+[source code](https://github.com/fab13n/elorn_energy/tree/1c3a9ec99).
 
 Time to write an application. Get Eclipse, with the Lua development
 tools, and File > New > Lua Project. The application's core will first
@@ -295,9 +318,34 @@ On that telnet:
 
 {% highlight lua %}
 $ telnet pi 3000
-...TODO...
+Trying 192.168.13.100...
+Connected to pi.
+Escape character is '^]'.
+Lua interactive shell
 > :get_record()
-...TODO...
+= {
+   discharge_average = 0,
+   discharge_n_cycles = 0,
+   time_to_go = -0.016666666666667,
+   n_auto_synchro = 1,
+   ah_total = 0,
+   relay = "OFF",
+   firmware = 212,
+   state_of_charge = 100,
+   discharge_max = 0,
+   discharge_n_full = 0,
+   voltage_max = 26.718,
+   alarm = "OFF",
+   consummed_energy = 0,
+   n_alarms_voltage_low = 0,
+   discharge_last = 0,
+   days_since_full_charge = 0,
+   n_alarms_voltage_high = 0,
+   model = "600S",
+   alarm_reason = 0,
+   current = 0,
+   voltage = 26.716,
+   voltage_min = 26.708 }
 > ^D
 {% endhighlight %}
 
@@ -338,8 +386,9 @@ amount of code not directly addressing the issues. I've put the
 resulting program
 [in a gist](https://gist.github.com/fab13n/25ac23c01a03e4a656fa)
 anyway, but you shouldn't reuse that. A much more proper version is
-available [on github](https://github.com/fab13n/elorn_energy), with
-decent error checking and a somewhat more polished API.
+available
+[on github](https://github.com/fab13n/elorn_energy/tree/1c3a9ec99),
+with decent error checking and a somewhat more polished API.
 
 Moreover, my
 [solar panels controller](http://www.victronenergy.fr/solar-charge-controllers/mppt7550/)
