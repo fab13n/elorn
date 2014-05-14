@@ -40,14 +40,16 @@ d'écluses. Jusqu'à sa première motorisation dans les années 50, il
 Élorn cesse le commerce en 1980, et plusieurs propriétaires successifs
 tentent de le transformer en logement ou en établissement public, sans
 grand succès. Il est raccourci, de 38m à 30m, lui permettant de passer
-dans les petites écluses des canaux du Midi ou du Nivernais : ça se
-fait en
-[decoupant un tranche au milieu du bateau](http://www.kairos-peniche.com/la-vie-du-kairos/raccourcir-un-bateau/),
-puis en ressoudant les deux extrémité ensemble.
+dans les petites écluses des canaux du Midi ou du Nivernais (on
+raccourcit un bateau en
+[decoupant un tranche au milieu,](http://www.kairos-peniche.com/la-vie-du-kairos/raccourcir-un-bateau/),
+puis en ressoudant les deux extrémités ensemble.
 
 ![Premier contact]({{ site.baseurl }}/img/genese-luxembourg-640.jpg)
 _Élorn dans les années 50, récemment motorisé, à l'époque avec un
-moteur GM de [char Sherman](http://fr.wikipedia.org/wiki/Char_M4_Sherman)._
+moteur GM de
+[char Sherman](http://fr.wikipedia.org/wiki/Char_M4_Sherman). Notez
+les [sauterelles](http://bordabord.org/news/sauterelle)._
 
 Le bateau est en bon état. Tout d'abord, l'épaisseur de coque est
 bonne ; c'est à vérifier absolument en cale sèche avant d'acheter un
