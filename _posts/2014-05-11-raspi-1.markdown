@@ -68,7 +68,8 @@ converters come in two flavors:
 
 * Those which dissipate the extra volts in a resistor; with the
   Raspberry using 5V, it would yield about 21% efficiency, and about
-  10W of losses. Nobody wants that.
+  10W of losses. About half of the fridge's consumption: nobody wants
+  that.
 
 * Those which hash, transform and redress the current, to offer
   decent efficiency. That's what I'll choose.
