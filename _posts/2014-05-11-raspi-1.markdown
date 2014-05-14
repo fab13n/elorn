@@ -82,7 +82,7 @@ BMV-601 Battery Monitor
 -----------------------
 
 The monitor has a serial output. Not RS232, but the bare minimum
-needed to talk with other embedded systems: a 4-pins interface (GNV,
+needed to talk with other embedded systems: a 4-pins interface (GND,
 +3.3V, TX, RX; no +5V, no flow control). The Raspberry also has a
 +3.3V serial line, on its side connector, and it's also powered
 at 3.3V. So let's connect them together and see if we can get
@@ -335,10 +335,11 @@ Further Improvements
 
 The code outlined here was quick and dirty on purpose, to minimize the
 amount of code not directly addressing the issues. I've put the
-resulting program [in a gist]() anyway, but you shouldn't reuse
-that. A much more proper version is available
-[on github](https://github.com/fab13n/elorn_energy), with decent error
-checking and a somewhat more polished API.
+resulting program
+[in a gist](https://gist.github.com/fab13n/25ac23c01a03e4a656fa)
+anyway, but you shouldn't reuse that. A much more proper version is
+available [on github](https://github.com/fab13n/elorn_energy), with
+decent error checking and a somewhat more polished API.
 
 Moreover, my
 [solar panels controller](http://www.victronenergy.fr/solar-charge-controllers/mppt7550/)
