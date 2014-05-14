@@ -6,11 +6,11 @@ categories: software
 ---
 
 **French summary:** _Cet article détaille l'installation logicielle
-   qui me permet de contrôler les systèmes électriques du bateau par
-   informatique, à l'aide d'une carte
-   [Raspberry Pi](http://www.raspberrypi.org). Comme il s'adresse
-   essentiellement à un public d'informaticiens et d'électroniciens,
-   presque tous anglophones, il est en Anglais._
+qui me permet de contrôler les systèmes électriques du bateau par
+informatique, à l'aide d'une carte
+[Raspberry Pi](http://www.raspberrypi.org). Comme il s'adresse à un
+public d'informaticiens et d'électroniciens, très majoritairement
+anglophones, il est en Anglais._
 
 As I've worked a lot in software engineering and telecom, embedded or
 not, I wanted to be able to log, remotely monitor and control the
