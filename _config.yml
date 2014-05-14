@@ -2,4 +2,4 @@ name: "Bateau Elorn"
 markdown: redcarpet
 pygments: true
 author: "F. Fleutot"
-baseurl: "elorn"
+baseurl: "/elorn"
