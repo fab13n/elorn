@@ -1,0 +1,72 @@
+---
+layout: post
+title:  "[EN] Raspberry Pi + Mihini, controlling an off-the-grid electrical installation, part II"
+date:   2014-05-12 22:35:00
+categories: software
+---
+
+In a previous post I've shown how a Raspberry Pi can acquire data from
+a BMV-60x battery monitor, thus being kept aware of a boat's batteries
+state. In this post, I'll extend the system to monitor the boat's
+solar panels.
+
+Purpose (besides fun)
+---------------------
+
+The boat has a mix of energy sources: a shore plug, a 5kW fuel
+generator, and solar panels. It also has a set of batteries, so that
+electricity can be used when needed, rather than when produced. The
+BMV indicates what globally goes in or out of the batteries, but can't
+tell how much comes from which source. For instance, if the BMV
+indicates -250W, the're no way to tell whether we're using 250W by
+night, or whether the panels produce 750W while we're using 1000W.
+
+My objective here will be to gather data in parallel from the MPPT
+(Maximum Power Point Tracker, i.e. the interface between the solar
+panels and the batteries) and the battery monitor.
+
+
+Hardware & Wiring
+-----------------
+
+The [MPPT]() uses a 3.3V UART, just as the BMV. The problem is, it's
+10m away from the BMV and the Raspberry:
+
+![Aft of the boat]({{ site.url }}/img/line-BMV-MPPT-back.jpg)
+_Aft of the boat, with the positions of the Raspberry and the
+MPPT. For scale, the boat is 5m wide._
+
+Besides, the Raspberry has only one UART, and it's taken. So the
+solution is to add a 10m USB extender (with a signal repeater at the
+end, as required for lengths >5m) and an UART/USB adapter. I'll also
+throw a USB hub in, as the inverter is just nearby the MPPT and I'll
+eventually wan to connect with it.
+
+Adapting the software
+---------------------
+
+Further Improvements
+--------------------
+
+Besides keeping a history and instant view on our solar production and
+battery usage, several improvements can be made:
+
+* coupled with GPS (and ideally orientation) data, we can figure out a
+  map of the solar-friendly places on the canal.
+
+* when we're connected to the shore, and the panels produce some
+  electricity yet not enough for our needs, we currently leave the
+  panels unused: the batteries are and remain full, we just use the
+  shore power. If we wanted to use solar power, we'd have to switch on
+  batteries when they're over, say, 90% full, and reenable shore
+  intake when they get below 75%. We're not going to do that manually,
+  but if the Raspberry gets control over the inverter, we can let it
+  handle that for us automatically, and with more refinments:
+
+  * switch the shore up when a water heater starts;
+
+  * limit shore intake so that we stay in the 75%-90% interval for as
+    long as possible;
+
+  * make sure the batteries are topped up once a week as it's better
+    for their health; etc.

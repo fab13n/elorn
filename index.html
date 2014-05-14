@@ -1,0 +1,21 @@
+---
+layout: default
+title: Your New Jekyll Site
+---
+
+<p>Notes, essentiellement techniques, sur la vie à bord <s>d'une péniche</s>
+d'un automoteur de canal, sur le Canal du Midi. La langue est soit le
+  Français soit l'Anglais, selon que je parle d'informatique ou de
+  sujets moins intrinsèquement anglophones.</p>
+
+<p><em>Technical notes about a liveaboard Dutch-style barge on the Canal du
+Midi. Notes about software and automation are mostly in English.</em>
+
+<div id="home">
+  <h1>Posts</h1>
+  <ul class="posts">
+    {% for post in site.posts %}
+      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+  </ul>
+</div>

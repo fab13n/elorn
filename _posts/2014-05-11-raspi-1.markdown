@@ -1,0 +1,346 @@
+---
+layout: post
+title:  "[EN] Raspberry Pi + Mihini, controlling an off-the-grid electrical installation, part I"
+date:   2014-05-11 13:59:36
+categories: software
+---
+
+**French summary:** _Cet article détaille l'installation logicielle
+   qui me permet de contrôler les systèmes électriques du bateau par
+   informatique, à l'aide d'une carte
+   [Raspberry Pi](http://www.raspberrypi.org). Comme il s'adresse
+   essentiellement à un public d'informaticiens et d'électroniciens,
+   presque tous anglophones, il est en Anglais._
+
+As I've worked a lot in software engineering and telecom, embedded or
+not, I wanted to be able to log, remotely monitor and control the
+boat, and I felt compelled to do it myself. For that, I bought a
+[Raspberry Pi](http://www.raspberrypi.org), and planned to connect it
+with the various systems I want to monitor or control. This first post
+describes the first step: acquiring and reportingdata from the
+[Victron BMV-601](http://www.victronenergy.fr/battery-monitors/bmv-600s%20and%20bmv-602s/)
+battery monitor.
+
+Those whose definition of "fun" differs from mine should look at
+Victron's
+[Color Control GX](http://www.victronenergy.fr/panel-systems-remote-monitoring/colorcontrol/),
+which requires more money but less time and fiddling.
+
+System Overview
+---------------
+
+The boat has several energy sources:
+
+* when in a port, it can get electricity straight from the shore plug;
+
+* when unplugged, it has a fuel generator (some ancestor of
+  [SDMO's Diesel 6000 genset](http://www.sdmo.com/FR/Produits/PPW/Groupes-electrogenes-portables/DIES6000EXL));
+  handy and not-so-expensive to operate at around 1.5l/h, but noisy
+  and polluting;
+
+* to limit genset usage, we've installed 12
+  [Sharp thin-film panels](http://www.sharp.eu/cps/rde/xchg/eu/hs.xsl/-/html/product_details.htm?product=NAE135G5),
+  with an
+  [MPPT controller](http://www.victronenergy.fr/solar-charge-controllers/mppt7550/)
+  to feed their production in our batteries;
+
+* a
+  [24V/430Ah bank of batteries](http://www.batterie-solaire.com/batterie-deep-cycle-us-6-v-430-ah-cr430-batterie-crown-c2x11755324),
+  in order to store solar energy and to operate the genset at nominal
+  power (those non-inverter groups hate to work in underload).
+
+* Except for solar charging and 24V appliances (navigation gear and a
+  couple of lights), everything going to and from the batteries goes
+  through a [charger/inverter](http://www.victronenergy.fr/inverters-chargers/multiplus-12v-24v-48v-800va-3kva/).
+
+![Electrical diagram]({{ site.url }}/img/elect.png)
+_Overview of the electrical installation, excluding appliances (in French)._
+
+
+
+
+Raspberry Power Supply
+----------------------
+
+I don't want the Raspberry to shut down when I cut the 230VAC, so I'll
+power it with the boat's batteries, which are 24VDC. DC-DC power
+converters come in two kinds:
+
+* those which dissipate the extra volts in a resistor + radiator; with
+  a Raspberry taking 500mA at 5V = 2.5W, it would consume 500mA*24V =
+  12W. 21% efficiency, nobody wants that.
+
+* those which hash, transform then redress the current, to offer
+  decent efficiency. That's what I'll choose.
+
+For a couple of euros on eBay, you can find such converters based on
+TI's [LM2596S](http://www.ti.com/product/lm2596). They deliver up to
+3A, accept up to 37V and can bring it down to 3.3V. All it takes to
+tune their in/out ratio is a screwdriver.
+
+BMV-601 Battery Monitor
+-----------------------
+
+The monitor has a serial output. Not RS232, but the bare minimum
+needed to talk with other embedded systems: a 4-pins interface (GNV,
++3.3V, TX, RX; no +5V, no flow control). The Raspberry also has a
++3.3V serial line, on its side connector, and it's also powered
+at 3.3V. So let's connect them together and see if we can get
+anything:
+
+![Back view]({{ site.url }}/img/raspi_installed.jpg)
+_Installation, viewed from the back_
+
+![Front View]({{ site.url }}/img/victron_front.jpg)
+_The same, viewed from the front_
+
+![Wiring]({{ site.url }}/img/wiring-raspi-bmv.png)
+_Wiring scheme_
+
+Operating System
+----------------
+
+There are several OS distributions for Raspberry. I chose [Raspbian]()
+because 1/ I've been using Debian derivatives for more than a decade
+and 2/ [Mihini](http://www.eclipse.org/mihini) is ported and tested on
+it.
+
+Software Setup
+--------------
+
+By default on Raspbian, the serial line is used to serve a
+terminal. [Let's disable
+that](http://www.raspberrypi-spy.co.uk/2013/12/free-your-raspberry-pi-serial-port/)
+and reclaim the port for ourselves. Also, let's put [a WiFi
+dongle](http://www.adafruit.com/products/814), as it'll save some
+wiring, and [configure
+it](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-3-network-setup/setting-up-wifi-with-occidentalis).
+
+Optionally, write your PC's SSH key (generally found in
+`~/.ssh/id_rsa.pub`) in the Raspberry's `~/.ssh/authorized_keys`. It
+will save you from typing passwords when you log in.
+
+Time to check if we see something on the serial port:
+
+{% highlight sh %}
+$ ssh pi@pi
+$ stty -F /dev/ttyAMA0 speed 19200 cs8 -icrnl -ixon -icanon
+$ cat /dev/ttyAMA0
+...TODO...
+^C
+$ _
+{% endhighlight %}
+
+Great :) Moreover, the protocol is pretty readable, and
+[fully documented]() by Victron. Time to write a small program to
+digests this.
+
+Mihini
+------
+
+[Eclipse Mihini](http://www.eclipse.org/mihini) is a development
+framework, primarily targetting embedded Linux systems, which allows
+to easily create and deploy M2M applications in [Lua](). Since I've
+participated a lot in its architecture and implementation, the choice
+was obvious, besides the many inherent qualities of that system--if I
+may say so.
+
+[Porting Mihini to a Raspberry]() isn't difficult, and is thoroughly
+documented on Internet. As a bonus, and unsurprisingly for an Eclipse
+product, it has an excellent support from the IDE, including
+autocompletion, out-of-the box remote debugging, application
+deployment etc.
+
+Data acquisition
+----------------
+
+A central quality of Lua, compared to its siblings Python, Ruby,
+Javascript etc., is that it integrates seamlessly and easily with
+C. So the 95% of your application that aren't time-critical are
+written in Lua, and the couple of time-constrained services can be
+written in C and interfaced with the rest of the application.
+
+Here, we have some performance needs: the BMV writes data at 19200
+bauds, and since there's no control flow, there's no way to guarantee
+against data loss, if the Raspberry's CPU gets too busy. So we want to
+acquire serial data at full speed; then, we'll have all the time we
+want to process / consolidate / report all this. The first idea that
+comes to mind would be to write data acquisition in C.
+
+But on second thoughs, the best code is the one you don't have to
+write, and there's a fairly well established program that reads data
+from a device on Unix, namely `cat`. All we need is to put a timeout
+to stop reading after a while: there's another Unix utility which
+does that, the aptly named `timeout`. So `timeout 1.5s cat
+/dev/ttyAMA0 > somefile` will dump 1.5 seconds worth of serial line
+chatter in the file of my choice. Within Lua, all I have to do is
+perform `os.execute("timeout 1.5s cat /dev/ttyAMA0 > somefile")`, then
+take all the time I want to read back the result from the file. I'm
+glossing over some details, but they're included and commented in the
+[source code]().
+
+Time to write an application. Get Eclipse, with the Lua development
+tools, and File > New > Lua Project. The application's core will first
+need to delagate serial reading to an external `cat` process:
+
+{% highlight lua %}
+initialized = false
+TMP_FILE = "/tmp/uart_dump"
+COMMAND_SETUP_UART = "stty -F /dev/ttyAMA0 speed 19200 cs8 -icrnl -ixon -icanon >/dev/null"
+COMMAND_UART_TO_TMP_FILE = "timeout 1.5s cat /dev/ttyAMA0 > "..TMP_FILE
+
+function get_raw_data()
+  if not initialized then
+    os.execute(COMMAND_SETUP_UART)
+    initialized = true
+  end
+  os.execute(COMMAND_UART_TO_TMP_FILE)
+  local f = io.open(TMP_FILE, "r")
+  local raw_data = f :read('*a')
+  f :close()
+  return raw_data
+end
+{% endhighlight %}
+
+(Notice that the exchange file is in `/tmp/`, hence on a tmpfs volume
+that's never written on the SD card: those cards only accept a
+finite number of erase/rewrite cycles).
+
+Now, we can extract a sequence of two frames out of that raw
+data. Indeed, the BMV keeps both instant informations about the
+batteries' state, and some historical statistics. They're organized in
+two frames; each kind of frame is written every second on the serial
+line, as a series of `"<label>\t<value>"` lines; the last line of a
+frame always has `"Checksum"` as a label.
+
+{% highlight lua %}
+function get_frame()
+  local REGEXP = '\13\10Checksum\t.()'
+  local raw_data = get_raw_data()
+  local checksums = { }
+  -- find 3 consecutive checksum lines in `raw_data`
+  local last_position = 1
+  for i=1,3 do
+    local next_position = string.match(raw_data, REGEXP, last_position)
+    checksums[i]  = next_position
+    last_position = next_position
+  end
+  assert(frame_checksum(raw_data, checksums[1], checksums[2]-1)==0)
+  assert(frame_checksum(raw_data, checksums[2], checksums[3]-1)==0)
+  return raw_data :sub (checksums[1], checksums[3]-1)
+end
+{% endhighlight %}
+
+Checking the frames for data corruption is fairly easy: the value
+associated with Checksum is an 8-bits ASCII byte chosen so that the
+sum of all bytes in the frame is a multiple of 256.
+
+{% highlight lua %}
+function frame_checksum(frame, a, b)
+  local bytes = { frame:byte(a,b) }
+  local sum = 0
+  for i=1,#bytes do sum=sum+bytes[i] end
+  return sum%256
+end
+{% endhighlight %}
+
+Finally, we want to turn those raw textual data into proper Lua
+records, that will be easily exploited by the rest of the program:
+
+{% highlight lua %}
+function get_record()
+  local frame = get_frame()
+  local record = { }
+  for line in frame :gmatch "[^\10\13]+" do
+    local label, value = line :match '(..-)\t(.+)'
+    if label~='Checksum' then
+      record[label] = value
+    end
+  end
+  return record
+end
+{% endhighlight %}
+
+[The actual code](https://github.com/fab13n/elorn_energy/tree/1c3a9ec/src/victron/bmv.lua)
+is slightly more sophisticated: error checking, some data conversion
+and a mutex, but the 4 functions above are indeed the core of my BMV
+data acquisition system.
+
+Data Restitution
+----------------
+
+The simplest way to check the result remotely is through telnet. In a
+couple of lines of Lua, I can open a telnet shell, and use it to run
+my commands above. Notice that Mihini support collaborative
+multi-tasking through its
+[sched module](http://download.eclipse.org/mihini/org.eclipse.mihini-incubation-0.9/Docs/Lua_User_API/sched.html),
+which allows to run the shell and the data acquisition
+concurrently. Let's launch such a shell on port 3000:
+
+{% highlight lua %}
+local sched = require 'sched'
+local shell = require 'shell.telnet'
+
+-- Insert the BMV monitoring functions here --
+
+function main()
+  shell.init{ address='0.0.0.0', port=3000, editmode='edit', historysize=64 }
+end
+
+sched.run(main)
+sched.loop()
+{% endhighlight %}
+
+On that telnet:
+
+{% highlight lua %}
+$ telnet pi 3000
+...TODO...
+> :get_record()
+...TODO...
+> ^D
+{% endhighlight %}
+
+It works! For a more user-friendly approach, Mihini also comes with a
+simple web server. Nothing fancy, secured nor scalable, but enough to
+serve a couple of web pages or web services behind a firewall. We can
+write a simple data-dumping page:
+
+{% highlight lua %}
+require 'web.server'
+require 'web.template'
+
+web.site[''] = web.template 'default' {
+    title = [[Data Monitoring: Elorn's batteries]],
+    body = [[
+    <table>
+      <% for label, value in pairs(get_record()) do %>
+      <tr>
+        <th><%=label%></th>
+        <td><%=value%></td>
+      </tr>
+      <% end %>
+     </table>
+     <p><a href=''>Refresh</a></p>
+]] }
+{% endhighlight %}
+
+Add a `web.start(9000)` in the `main()` function, and we're set:
+
+![Reported on my phone]({{ site.url }}/img/screenshot-phone.png)
+
+
+Further Improvements
+--------------------
+
+The code outlined here was quick and dirty on purpose, to minimize the
+amount of code not directly addressing the issues. I've put the
+resulting program [in a gist]() anyway, but you shouldn't reuse
+that. A much more proper version is available
+[on github](https://github.com/fab13n/elorn_energy), with decent error
+checking and a somewhat more polished API.
+
+Moreover, my
+[solar panels controller](http://www.victronenergy.fr/solar-charge-controllers/mppt7550/)
+uses VE.Direct as protocol, which is closely related to the BMV text
+protocol: the common code parts will be factored together. 

@@ -1,0 +1,119 @@
+---
+layout: post
+title:  "Elorn : genèse du projet"
+date:   2014-04-11 12:00:00
+categories: general
+---
+
+Nous avons commencé à penser habiter sur l'eau en 2011. Nous nous
+déplacions beaucoup à vélo le long du canal du Midi, nous étions
+sensibles au charme des bateaux, mais comme beaucoup de gens, nous
+pensions que c'était une vie trop compliquée, pas pour nous.
+
+![Canal du Midi en Août]({{ site.url }}/img/genese-canal-640.jpg)
+_Vivre là !_
+
+Et finalement, si. Pourquoi ? Le charme d'une vieille et robuste
+machine chargée d'histoire, la vie dans l'eau au milieu de la faune,
+la possibilité de bouger facilement. Une envie spontanée de ne
+pas faire comme tout le monde. Le plaisir aussi de trouver du sens
+dans des démarches de réduction de notre empreinte écologique, et
+d'autonomisation énergétique : dans une maison branchée à une usine
+d'épuration Veolia, à quoi bon installer des toilettes sèches ? Quel
+est le sens du photovoltaïque, quand l'État en a fait un mélange
+de niche fiscale et de subventions aux artisans-couvreurs ?
+
+![Premier contact]({{ site.url }}/img/genese-1er-contact-640.jpg)
+_Premier contact avec Elorn, Avril 2012._
+
+Résultat, en 2012, nous achetons Élorn : un automoteur de canal de
+gabarit Freycinet (ce que les gens d'à-terre appellent une "péniche",
+bien que les péniches, aujourd'hui disparues, étaient des bateaux en
+bois non motorisés de 38.5m x 5.05m). Un bateau né en 1907 à
+[Ombret](http://www.bateaux-meuse.be/intro.htm) en Belgique, à une
+époque où les bateaux en fer imitaient encore les courbes de leurs
+ancêtres en bois. Les conceptions plus récentes s'inspirent plutôt de
+la boîte à chaussures, le critère étant de remplir au mieux les sas
+d'écluses. Jusqu'à sa première motorisation dans les années 50, il
+était halé par des animaux ou des
+[tracteurs spécialisés](http://www.kairos-peniche.com/la-vie-du-kairos/un-tracteur-de-halage-latil-redemarre-laventure-continue/).
+Élorn cesse le commerce en 1980, et plusieurs propriétaires successifs
+tentent de le transformer en logement ou en établissement public, sans
+grand succès. Il est raccourci, de 38m à 30m, lui permettant de passer
+dans les petites écluses des canaux du Midi ou du Nivernais : ça se
+fait en
+[decoupant un tranche au milieu du bateau](http://www.kairos-peniche.com/la-vie-du-kairos/raccourcir-un-bateau/),
+puis en ressoudant les deux extrémité ensemble.
+
+![Premier contact]({{ site.url }}/img/genese-luxembourg-640.jpg)
+_Élorn dans les années 50, récemment motorisé, à l'époque avec un
+moteur GM de [char Sherman](http://fr.wikipedia.org/wiki/Char_M4_Sherman)._
+
+Le bateau est en bon état. Tout d'abord, l'épaisseur de coque est
+bonne ; c'est à vérifier absolument en cale sèche avant d'acheter un
+bateau en fer, sous peine de catastrophe financière : changer un fond
+pourri, c'est 50000€, des mois de travaux, et le démontage de tout
+l'aménagement intérieur ! Le moteur, un [Baudouin DK4] de 1956,
+démarre au quart de tour grâce à sa [bouteille d'air comprimé] ; il
+pèse autant qu'une voiture pour 100CV, mais il est indestructible et
+pourrait brûler du goudron en guise de carburant. L'électricité
+demande quelques mises aux normes, mais rien de dramatique.
+
+La plomberie réclame d'être revue, en revanche : tout part directement
+au canal, ce qui n'est plus légal. La mise en conformité est délicate,
+les textes nécessaires n'étant pas tous publiés. Les eaux usées
+doivent être stockées ou retraitées par un système aux normes, mais
+ces normes ne sont toujours pas sorties, et sur l'essentiel du réseau
+il n'y a pas de service de bateau-vanne (le nom poli pour dire
+"_pompes à merde flottantes_" :)). Quant à imaginer tous les
+bateaux-logement aller dépoter au port régulièrement, c'est une
+plaisanterie : beaucoup ne sont plus en état de naviguer, ceux qui le
+sont n'ont pas forcément de propriétaire capable de les conduire, et
+imaginez les embouteillage, que ce soit au port ou dans les rares
+aires de retournement adaptées aux 30m et 40m... Donc nous retraitons
+nos eaux grises (eaux usées sauf toilettes) dans un bac de
+dégraissage, en renonçant à certains produits comme la javel, et
+installons des toilettes sèches dont
+[Écopons](http://www.toilettes-ecologiques-toulouse.fr/) accepte
+gentiment le compost. Un peu de tuyauterie, des pompes de relevage,
+des vannes 3-voies pour conserver le tout-au-canal en cas de panne ;
+un système de potabilisation, pour utiliser et boire l'eau du canal ;
+et voilà !
+
+L'électricité était adaptée à une vie perpétuellement connectée à une
+prise de quai, pas à l'autonomie. Les toutes petites batteries 24V
+n'alimentaient, outre les organes de navigation, que quelques ampoules
+dans l'habitacle. Il y a un groupe électrogène au fioul (essence
+interdite en salle machine, pour cause de vapeurs et de risques
+d'explosion), mais il est bruyant, polluant, cher, et n'aime pas
+tourner en faible charge. Donc nous nous lançons dans une installation
+qui nous rendra au bateau sa mobilité : d'abord un gros jeu de
+batteries, de quoi stocker plusieurs jours de consommation ; un
+[chargeur-onduleur](http://www.victronenergy.fr/inverters-chargers/multiplus-12v-24v-48v-800va-3kva/
+), qui va charger ces batteries, depuis le quai ou le groupe, et
+retransformer leur énergie en 230V au besoin ; des
+[panneaux solaires amorphes](http://www.sharp.eu/cps/rde/xchg/eu/hs.xsl/-/html/product_details.htm?product=NAE135G5)
+(rendement moindre que le monocristallin installé pour profiter des
+subventions / rachat, mais plus régulier en cas de mauvais temps ou
+d'ombre partielle), avec
+[leur chargeur](http://www.victronenergy.fr/solar-charge-controllers/mppt7550/)
+; un paquet de boutons dans l'habitacle pour piloter tout ça ; de
+l'[électroménager basse consommation électrique](http://www.bosch-home.fr/nos-produits/le-froid/refrigerateurs/KGE36AL40.html)
+; il nous reste à choisir un chauffage permanent non-électrique
+([notre poêle actuel]({{ site.url }}/img/genese-poele.jpg) est un
+gouffre), et à installer un chauffe eau solaire, idéalement avec un
+bouilleur dans le poêle pour l'hiver.
+
+Dans la suite de ce blog, je compte détailler les installations
+d'autonomie que nous avons faites, et celles que nous ferons. Ce
+travail servira de base à un mode d'emploi du bateau, pour pouvoir le
+prêter, le louer ou le transmettre un jour à un successeur. J'espère
+qu'il sera aussi utile à ceux qui veulent se lancer dans l'économie et
+l'autonomie énergétiques, sur l'eau ou ailleurs.
+
+
+![Photos historiques 1]({{ site.url }}/img/histo-1-640.jpg)
+_Quelques photos historiques: dans les années 60, en 1994._
+
+![Photos historiques 2]({{ site.url }}/img/histo-2-640.jpg)
+_Dans les années 2000, en navigation en 2013._
