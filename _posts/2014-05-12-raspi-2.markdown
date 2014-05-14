@@ -6,6 +6,13 @@ date:   2014-05-12 22:35:00
 categories: software
 ---
 
+**French summary:** _Cet article détaille l'installation logicielle
+qui me permet de contrôler les systèmes électriques du bateau par
+informatique, à l'aide d'une carte
+[Raspberry Pi](http://www.raspberrypi.org). Comme il s'adresse à un
+public d'informaticiens et d'électroniciens, très majoritairement
+anglophones, il est en Anglais._
+
 In a previous post I've shown how a Raspberry Pi can acquire data from
 a BMV-60x battery monitor, thus being kept aware of a boat's batteries
 state. In this post, I'll extend the system to monitor the boat's

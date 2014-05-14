@@ -5,12 +5,12 @@ date:   2014-04-27 12:00:00
 categories: software
 ---
 
-**French summary:** _Cette page est en Anglais, parce qu'elle
-n'intéresse que des informaticiens et des électroniciens, qui sont à
-peu près tous anglophones. Elle liste quelques idées que j'ai en tête,
-plus ou moins concrètes, pour surveiller et automatiser divers
+**French summary:** _Cet article liste quelques idées que j'ai en
+tête, plus ou moins concrètes, pour surveiller et automatiser divers
 systèmes sur le bateau (essentiellement la production d'électricité et
-d'eau)._
+d'eau). Comme il s'adresse à un public d'informaticiens et
+d'électroniciens, très majoritairement anglophones, il est en
+Anglais._
 
 Introduction
 ------------
