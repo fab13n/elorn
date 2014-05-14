@@ -10,7 +10,7 @@ déplacions beaucoup à vélo le long du canal du Midi, nous étions
 sensibles au charme des bateaux, mais comme beaucoup de gens, nous
 pensions que c'était une vie trop compliquée, pas pour nous.
 
-![Canal du Midi en Août]({{ site.url }}/img/genese-canal-640.jpg)
+![Canal du Midi en Août]({{ site.baseurl }}/img/genese-canal-640.jpg)
 _Vivre là !_
 
 Et finalement, si. Pourquoi ? Le charme d'une vieille et robuste
@@ -23,7 +23,7 @@ d'épuration Veolia, à quoi bon installer des toilettes sèches ? Quel
 est le sens du photovoltaïque, quand l'État en a fait un mélange
 de niche fiscale et de subventions aux artisans-couvreurs ?
 
-![Premier contact]({{ site.url }}/img/genese-1er-contact-640.jpg)
+![Premier contact]({{ site.baseurl }}/img/genese-1er-contact-640.jpg)
 _Premier contact avec Elorn, Avril 2012._
 
 Résultat, en 2012, nous achetons Élorn : un automoteur de canal de
@@ -45,7 +45,7 @@ fait en
 [decoupant un tranche au milieu du bateau](http://www.kairos-peniche.com/la-vie-du-kairos/raccourcir-un-bateau/),
 puis en ressoudant les deux extrémité ensemble.
 
-![Premier contact]({{ site.url }}/img/genese-luxembourg-640.jpg)
+![Premier contact]({{ site.baseurl }}/img/genese-luxembourg-640.jpg)
 _Élorn dans les années 50, récemment motorisé, à l'époque avec un
 moteur GM de [char Sherman](http://fr.wikipedia.org/wiki/Char_M4_Sherman)._
 
@@ -100,7 +100,7 @@ d'ombre partielle), avec
 ; un paquet de boutons dans l'habitacle pour piloter tout ça ; de
 l'[électroménager basse consommation électrique](http://www.bosch-home.fr/nos-produits/le-froid/refrigerateurs/KGE36AL40.html)
 ; il nous reste à choisir un chauffage permanent non-électrique
-([notre poêle actuel]({{ site.url }}/img/genese-poele.jpg) est un
+([notre poêle actuel]({{ site.baseurl }}/img/genese-poele.jpg) est un
 gouffre), et à installer un chauffe eau solaire, idéalement avec un
 bouilleur dans le poêle pour l'hiver.
 
@@ -112,8 +112,8 @@ qu'il sera aussi utile à ceux qui veulent se lancer dans l'économie et
 l'autonomie énergétiques, sur l'eau ou ailleurs.
 
 
-![Photos historiques 1]({{ site.url }}/img/histo-1-640.jpg)
+![Photos historiques 1]({{ site.baseurl }}/img/histo-1-640.jpg)
 _Quelques photos historiques: dans les années 60, en 1994._
 
-![Photos historiques 2]({{ site.url }}/img/histo-2-640.jpg)
+![Photos historiques 2]({{ site.baseurl }}/img/histo-2-640.jpg)
 _Dans les années 2000, en navigation en 2013._

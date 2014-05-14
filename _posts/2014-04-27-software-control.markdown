@@ -57,7 +57,7 @@ switch the charger on and off programmatically, or limit its intake
 current, depending on solar production, to use a mixed shore + solar
 electricity.
 
-![Multiplus control panel]({{ site.url }}/img/Digital-Multi-Control--Panel-Front-640.jpg)
+![Multiplus control panel]({{ site.baseurl }}/img/Digital-Multi-Control--Panel-Front-640.jpg)
 _The control panel I look forward to emulate on my phone._
 
 There are a couple of other things, either interesting or fun to

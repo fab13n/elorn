@@ -50,7 +50,7 @@ court, donc la réponse est : assez vite ! Attention, si la pression
 d'eau à bord est en dessous de 3-4 bars, l'osmose inverse ne marche
 pas ; prévoir alors une pompe booster.
 
-![Installation sous l'évier]({{ site.url }}/img/eau-evier-640.jpg)
+![Installation sous l'évier]({{ site.baseurl }}/img/eau-evier-640.jpg)
 _Installation sous l'évier : osmoseur, réservoir, chauffe-eau, vase
 d'expansion, pompe de relevage, vanne 3-voies._
 
@@ -155,10 +155,10 @@ allumée que le temps de remplir la cuve.
 
 ## Pour résumer
 
-![Diagramme général plomberie]({{ site.url }}/img/eau-diagramme.png)
+![Diagramme général plomberie]({{ site.baseurl }}/img/eau-diagramme.png)
 _Schéma de principe._
 
-![Plan de la plomberie]({{ site.url }}/img/eau-plan-640.png)
+![Plan de la plomberie]({{ site.baseurl }}/img/eau-plan-640.png)
 _Plan de la plomberie à l'avant du bateau._
 
 

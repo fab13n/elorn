@@ -53,7 +53,7 @@ The boat has several energy sources:
   couple of lights), everything going to and from the batteries goes
   through a [charger/inverter](http://www.victronenergy.fr/inverters-chargers/multiplus-12v-24v-48v-800va-3kva/).
 
-![Electrical diagram]({{ site.url }}/img/elect.png)
+![Electrical diagram]({{ site.baseurl }}/img/elect.png)
 _Overview of the electrical installation, excluding appliances (in French)._
 
 
@@ -88,13 +88,13 @@ needed to talk with other embedded systems: a 4-pins interface (GNV,
 at 3.3V. So let's connect them together and see if we can get
 anything:
 
-![Back view]({{ site.url }}/img/raspi_installed.jpg)
+![Back view]({{ site.baseurl }}/img/raspi_installed.jpg)
 _Installation, viewed from the back_
 
-![Front View]({{ site.url }}/img/victron_front.jpg)
+![Front View]({{ site.baseurl }}/img/victron_front.jpg)
 _The same, viewed from the front_
 
-![Wiring]({{ site.url }}/img/wiring-raspi-bmv.png)
+![Wiring]({{ site.baseurl }}/img/wiring-raspi-bmv.png)
 _Wiring scheme_
 
 Operating System
@@ -327,7 +327,7 @@ web.site[''] = web.template 'default' {
 
 Add a `web.start(9000)` in the `main()` function, and we're set:
 
-![Reported on my phone]({{ site.url }}/img/screenshot-phone.png)
+![Reported on my phone]({{ site.baseurl }}/img/screenshot-phone.png)
 
 
 Further Improvements
@@ -343,4 +343,4 @@ checking and a somewhat more polished API.
 Moreover, my
 [solar panels controller](http://www.victronenergy.fr/solar-charge-controllers/mppt7550/)
 uses VE.Direct as protocol, which is closely related to the BMV text
-protocol: the common code parts will be factored together. 
+protocol: the common code parts will be factored together.

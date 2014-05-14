@@ -144,7 +144,7 @@ bateau, de garder les composants clef (frigos, pompes et lumière) en
 
 ## Panneaux
 
-![Panneaux]({{ site.url }}/img/electricite-panneaux-640.jpg)
+![Panneaux]({{ site.baseurl }}/img/electricite-panneaux-640.jpg)
 _250kg de panneaux avant, pendant et après leur pose._
 
 Les panneaux sont des
@@ -208,7 +208,7 @@ atypique en font de toutes façons un butin difficile à prendre et
 
 ### Pour résumer
 
-![schema électrique]({{ site.url }}/img/elect.png)
+![schema électrique]({{ site.baseurl }}/img/elect.png)
 _Schéma de principe des sources électriques du bateau._
 
 ## Les consommateurs
@@ -293,7 +293,7 @@ L'ordre de grandeur est d'1kWh dans les batteries, en comptant large
 (pertes dans le chargeur et âge canonique des batteries de récup) :
 négligeable à quai, mais pas en amarrage sauvage.
 
-![Panneaux]({{ site.url }}/img/electricite-bakfiets-640.jpg)
+![Panneaux]({{ site.baseurl }}/img/electricite-bakfiets-640.jpg)
 _Notre seconde voiture électrique de bobos._
 
 Pour la lumière, évidemment, diodes ou fluo-compactes partout. Le plus

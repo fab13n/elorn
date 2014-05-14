@@ -32,7 +32,7 @@ Hardware & Wiring
 The [MPPT]() uses a 3.3V UART, just as the BMV. The problem is, it's
 10m away from the BMV and the Raspberry:
 
-![Aft of the boat]({{ site.url }}/img/line-BMV-MPPT-back.jpg)
+![Aft of the boat]({{ site.baseurl }}/img/line-BMV-MPPT-back.jpg)
 _Aft of the boat, with the positions of the Raspberry and the
 MPPT. For scale, the boat is 5m wide._
 
