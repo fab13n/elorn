@@ -97,6 +97,11 @@ _The same, viewed from the front_
 ![Wiring]({{ site.baseurl }}/img/wiring-raspi-bmv.png)
 _Wiring scheme_
 
+**Note:** although the Raspberry has a +3.3V output (facing the +5V in
+  the corner of the card), it's not only useless to connect it to the
+  BMV, it has a nasty side-effect: it resets the BMV whenever the
+  Raspberry is switched off.
+
 Operating System
 ----------------
 
