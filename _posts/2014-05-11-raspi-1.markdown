@@ -36,7 +36,7 @@ The boat has several energy sources:
 * when unplugged, it has a fuel generator (some ancestor of
   [SDMO's Diesel 6000 genset](http://www.sdmo.com/FR/Produits/PPW/Groupes-electrogenes-portables/DIES6000EXL));
   handy and not-so-expensive to operate at around 1.5l/h, but noisy
-  and polluting;
+  and stinky;
 
 * to limit genset usage, we've installed 12
   [Sharp thin-film panels](http://www.sharp.eu/cps/rde/xchg/eu/hs.xsl/-/html/product_details.htm?product=NAE135G5),
@@ -45,7 +45,7 @@ The boat has several energy sources:
   to feed their production in our batteries;
 
 * a
-  [24V/430Ah bank of batteries](http://www.batterie-solaire.com/batterie-deep-cycle-us-6-v-430-ah-cr430-batterie-crown-c2x11755324),
+  [24V*430Ah bank of batteries](http://www.batterie-solaire.com/batterie-deep-cycle-us-6-v-430-ah-cr430-batterie-crown-c2x11755324),
   in order to store solar energy and to operate the genset at nominal
   power (those non-inverter groups hate to work in underload).
 
@@ -64,13 +64,13 @@ Raspberry Power Supply
 
 I don't want the Raspberry to shut down when I cut the 230VAC, so I'll
 power it with the boat's batteries, which are 24VDC. DC-DC power
-converters come in two kinds:
+converters come in two flavors:
 
-* those which dissipate the extra volts in a resistor + radiator; with
-  a Raspberry taking 500mA at 5V = 2.5W, it would consume 500mA*24V =
-  12W. 21% efficiency, nobody wants that.
+* Those which dissipate the extra volts in a resistor; with the
+  Raspberry using 5V, it would yield about 21% efficiency, and about
+  10W of losses. Nobody wants that.
 
-* those which hash, transform then redress the current, to offer
+* Those which hash, transform and redress the current, to offer
   decent efficiency. That's what I'll choose.
 
 For a couple of euros on eBay, you can find such converters based on
@@ -84,9 +84,8 @@ BMV-601 Battery Monitor
 The monitor has a serial output. Not RS232, but the bare minimum
 needed to talk with other embedded systems: a 4-pins interface (GND,
 +3.3V, TX, RX; no +5V, no flow control). The Raspberry also has a
-+3.3V serial line, on its side connector, and it's also powered
-at 3.3V. So let's connect them together and see if we can get
-anything:
++3.3V serial line, on its side connector. So let's connect them
+together and see if we can get anything:
 
 ![Back view]({{ site.baseurl }}/img/raspi_installed.jpg)
 _Installation, viewed from the back_
@@ -114,12 +113,11 @@ Software Setup
 --------------
 
 By default on Raspbian, the serial line is used to serve a
-terminal. [Let's disable
-that](http://www.raspberrypi-spy.co.uk/2013/12/free-your-raspberry-pi-serial-port/)
-and reclaim the port for ourselves. Also, let's put [a WiFi
-dongle](http://www.adafruit.com/products/814), as it'll save some
-wiring, and [configure
-it](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-3-network-setup/setting-up-wifi-with-occidentalis).
+terminal. [Let's disable that](http://www.raspberrypi-spy.co.uk/2013/12/free-your-raspberry-pi-serial-port/)
+and reclaim the port for ourselves. Also, let's put
+[a WiFi dongle](http://www.adafruit.com/products/814) (it'll save some
+wiring) and
+[configure it](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-3-network-setup/setting-up-wifi-with-occidentalis).
 
 Optionally, write your PC's SSH key (generally found in
 `~/.ssh/id_rsa.pub`) in the Raspberry's `~/.ssh/authorized_keys`. It
