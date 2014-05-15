@@ -33,6 +33,19 @@ My objective here will be to gather data in parallel from the MPPT
 (Maximum Power Point Tracker, i.e. the interface between the solar
 panels and the batteries) and the battery monitor.
 
+![Electrical sources]({{ site.baseurl }}/img/elect-flow.png)
+
+_Electrical sources in the boat. I currently get the sum of what goes
+in and out of the batteries (1), but I don't know whether the inverter
+uses or provides energy (2), and I don't know how much the solar
+panels produce, if anything (2). I need a measure of (3), which will
+allow me to deduce what inverter does: (2)=(1)-(3). It would also be
+nice to have an implusion counter on the main meter (4), and some way
+to know whether power comes from the shore (5) or from the generator
+(6).
+[Cheap AC sensors](http://shop.openenergymonitor.com/100a-max-clip-on-current-sensor-ct)
+would do, as well as a tension detector on the generator's 12VAC
+circuit, but that will be dealt with in a future post._
 
 Hardware & Wiring
 -----------------

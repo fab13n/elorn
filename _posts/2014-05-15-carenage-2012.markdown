@@ -1,0 +1,35 @@
+---
+layout: post
+title:  "Premier carenage, Juillet 2012"
+date:   2014-05-15 12:00:00
+categories: genese
+---
+
+"Un bateau, ça s'achète à terre" : quand on achète un bateau en acier,
+il faut absolument contrôler l'état de la coque avant de finaliser la
+transaction. Elle peut s'user, et surtout fondre par électrolyse. Ne
+pas le faire peut exposer à un désastre financier et judiciaire. Donc
+en été 2012, nous avons emmené le bateau, pas encore à nous, en cale
+sèche [au pont des demoiselles](). Là nous l'avons lavé, fait
+expertiser et repeint. Ça a aussi été notre première occasion de
+naviguer avec le bateau.
+
+Laurent a fait un vidéo à partir de notre tas de photos collectif :
+
+<p style='text-align: center'>
+  <iframe
+    style="text-align: center;"
+    width="420" height="315"
+    src="http://www.youtube.com/embed/DkDe-lXr3ts"
+    frameborder="0" allowfullscreen>
+  </iframe>
+</p>
+
+![Coque sale]({{ site.baseurl }}/img/carenage-1-640.jpg)
+_Avant..._
+
+![Propre et repeinte]({{ site.baseurl }}/img/carenage-2-640.jpg)
+_...Après!_
+
+![Voyage retour]({{ site.baseurl }}/img/carenage-retour-640.jpg)
+_Traversée retour de Toulouse._

@@ -2,7 +2,7 @@
 layout: post
 title:  "Elorn : genèse du projet"
 date:   2014-04-11 12:00:00
-categories: general
+categories: genese
 ---
 
 Nous avons commencé à penser habiter sur l'eau en 2011. Nous nous
