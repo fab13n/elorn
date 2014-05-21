@@ -6,13 +6,11 @@ categories: autonomie
 ---
 
 Premier débranchage du bateau ! L'été tarde à venir sur Toulouse, le
-port est couvert par les platanes, il fait sombre comme dans une cave
-dans le bateau.
-
-Lundi nous avons débranché la prise électrique, allumé l'onduleur, et
-Go!, nous sommes allés nous installé quelques kilomètres au Sud, à
-Auzeville-Tolosane. Nous sommes entourés de champs, de chemins de
-terre et de quelques ruches.
+port est couvert par les platanes, et il fait sombre comme dans une
+cave dans le bateau. Lundi nous avons débranché la prise électrique,
+allumé l'onduleur, et largué les amarres. Nous sommes allés nous
+installé quelques kilomètres au Sud, à Auzeville-Tolosane. Nous sommes
+entourés de champs, de chemins de terre et de quelques ruches.
 
 <p style='text-align: center'>
   <iframe
@@ -30,16 +28,18 @@ terre et de quelques ruches.
   </small>
 </p>
 
-On va sûrement continuer à descendre doucement, au fil de
-l'inspiration : on a [des amis amarrés 1km au sud](), et de toutes
-façons la prochaine zone de virage pour les bateaux de 30 est après
-l'[écluse de Castanet]().
+On va sûrement continuer à remonter doucement, au fil de
+l'inspiration : on a
+[des amis amarrés 1km au sud](http://www.ladepeche.fr/article/2014/05/15/1881436-des-chevres-pour-tondre-les-berges-du-canal-du-midi.html),
+et de toutes façons la prochaine zone de virage pour les bateaux de 30
+est après
+l'[écluse de Castanet](http://www.canaldumidi.com/Toulousain/Castanet-Tolosan/Ecluse-de-Castanet.php).
 
 ![Into the wild]({{ site.baseurl }}/img/into-the-wild-640.jpg)
 _Into the wild, seuls à au moins des centaines de mètres à la ronde !_
 
 
-Mardi le soleil bien que très timide a suffit à recharger le gros kWh
+Mardi le soleil bien que très timide a suffit à recharger le kWh
 qu'on a consommé dans la soirée. Il y a encore beaucoup de
 consommation inutile sur le bateau, à chasser au wattmètre. J'ai
 commencé à uploader nos stats électriques sur un serveur de
@@ -50,5 +50,5 @@ des décibels de groupe électrogène dans les oreilles à chaque fois
 qu'on se plante :)
 
 ![Graphique]({{ site.baseurl }}/img/charts-640.jpg)
-_Graphes de niveau de batteries et de consommaation._
+_Graphes de niveau de batteries et de consommation._
 
