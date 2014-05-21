@@ -30,7 +30,7 @@ entourés de champs, de chemins de terre et de quelques ruches.
 
 On va sûrement continuer à remonter doucement, au fil de
 l'inspiration : on a
-[des amis amarrés 1km au sud](http://www.ladepeche.fr/article/2014/05/15/1881436-des-chevres-pour-tondre-les-berges-du-canal-du-midi.html),
+[des amis amarrés 1km plus au sud](http://www.ladepeche.fr/article/2014/05/15/1881436-des-chevres-pour-tondre-les-berges-du-canal-du-midi.html),
 et de toutes façons la prochaine zone de virage pour les bateaux de 30
 est après
 l'[écluse de Castanet](http://www.canaldumidi.com/Toulousain/Castanet-Tolosan/Ecluse-de-Castanet.php).
@@ -39,7 +39,7 @@ l'[écluse de Castanet](http://www.canaldumidi.com/Toulousain/Castanet-Tolosan/E
 _Into the wild, seuls à au moins des centaines de mètres à la ronde !_
 
 
-Mardi le soleil bien que très timide a suffit à recharger le kWh
+Mardi le soleil, bien que très timide, a suffit à recharger le kWh
 qu'on a consommé dans la soirée. Il y a encore beaucoup de
 consommation inutile sur le bateau, à chasser au wattmètre. J'ai
 commencé à uploader nos stats électriques sur un serveur de
