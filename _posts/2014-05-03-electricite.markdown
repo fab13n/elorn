@@ -48,7 +48,7 @@ un groupe diesel, qui en plus fera au moins 4kW !
 ## Chargeur-Onduleur
 
 Les batteries sont gérées par un
-[Victron Multiplus 3000W/24V/16A](http://www.victronenergy.fr/inverters-chargers/multiplus-12v-24v-48v-800va-3kva/)
+[Victron Multiplus 3000W/24V/70A/16A](http://www.victronenergy.fr/inverters-chargers/multiplus-12v-24v-48v-800va-3kva/)
 C'est un appareil qui combine charge des batteries depuis le 230V, et
 retransformation de l'électricité batteries en 230V. L'intérêt de
 combiner, c'est qu'il sait faire un certain nombre de choses
