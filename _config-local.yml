@@ -4,4 +4,4 @@ markdown: redcarpet
 pygments: true
 author: "F. Fleutot"
 url: "http://fab13n.github.io/elorn"
-baseurl: "/elorn"
+baseurl: "file:///home/fabien/Dropbox/elorn/site/_site"
