@@ -12,6 +12,17 @@ informatique, à l'aide d'une carte
 public d'informaticiens et d'électroniciens, très majoritairement
 anglophones, il est en Anglais._
 
+**Edit:** In a previous version of this post, I did data acquisition
+through a separate process, with something akin to
+`os.execute("timeout 1.5s /dev/ttyAMA0 > /tmp/buffer_file")`. Not only
+was it overkill to read 200 bytes at 19200 bauds, it bugged under some
+circumstances, not yet fully explained (I suspect some Unix signals
+inheritance issues in Mihini's `app_daemon`, investigations are
+ongoing). In the reviewed version, I'll just use `uart=serial.open()`
+then `uart:read()` and be done with it.
+
+_(end of preliminaries)_
+
 As I've worked a lot in software engineering and telecom, embedded or
 not, I wanted to be able to log, remotely monitor and control the
 boat, and I felt compelled to do it myself. For that, I bought a
@@ -181,57 +192,33 @@ debugging, application deployment etc.
 Data acquisition
 ----------------
 
-A central quality of Lua, compared to its siblings Python, Ruby,
-Javascript etc., is that it integrates seamlessly and easily with
-C. So the 95% of your application that aren't time-critical are
-written in Lua, and the couple of time-constrained services can be
-written in C and interfaced with the rest of the application.
+Mihini comes with a serial interface, allowing to read line-by-line,
+or by arbitrary chunks, with optional timeouts. Some quick experiments
+have shown that reading line-by-line causes a lot of errors. It's not
+completely surprising, given the lack of control signals on the UART;
+I guess it also means that the Raspberry has little to no buffer on
+this UART interface.
 
-Here, we have some performance needs: the BMV writes data at 19200
-bauds, and since there's no control flow, there's no way to guarantee
-against data loss, if the Raspberry's CPU gets too busy. So we want to
-acquire serial data at full speed; then, we'll have all the time we
-want to process / consolidate / report all this. The first idea that
-comes to mind would be to write data acquisition in C.
+Anyway, we'll just do a single read operation that's sufficient to
+acquire enough data to parse, i.e. at least two full frames. How much
+is enough? A quick test shows that I get 110 bytes long frames, so 220
+bytes for two frames. If I read in the middle of a frame, I might lose
+up to 109 bytes, so I need to read ~330 bytes. Let's say 400 bytes to
+play safe.
 
-But on second thought, the best code is the one you don't have to
-write, and there's a fairly well established program that reads data
-from a device on Unix, namely `cat`. All we need is to put a timeout
-to stop reading after a while: there's another Unix utility which
-does that, the aptly named `timeout`. So `timeout 1.5s cat
-/dev/ttyAMA0 > somefile` will dump 1.5 seconds worth of serial line
-chatter in the file of my choice. Within Lua, all I have to do is
-perform `os.execute("timeout 1.5s cat /dev/ttyAMA0 > somefile")`, then
-take all the time I want to read back the result from the file. I'm
-glossing over some details, but they're included and commented in the
-[source code](https://github.com/fab13n/elorn_energy/tree/1c3a9ec99).
-
-Time to write an application. Get Eclipse, with the Lua development
-tools, and File > New > Lua Project. The application's core will first
-need to delagate serial reading to an external `cat` process:
+The two frames are pushed on the uart every second, with half-a-second
+of time-shidt. 110 bytes = 880 bits at 19200 baud should go through in
+about 1/20s. The reading operation shouldn't block for more than 1.1s.
 
 {% highlight lua %}
-initialized = false
-TMP_FILE = "/tmp/uart_dump"
-COMMAND_SETUP_UART = "stty -F /dev/ttyAMA0 speed 19200 cs8 -icrnl -ixon -icanon >/dev/null"
-COMMAND_UART_TO_TMP_FILE = "timeout 1.5s cat /dev/ttyAMA0 > "..TMP_FILE
+require 'serial'
+
+uart = serial.open('/dev/ttyAMA0', { baudrate=19200 })
 
 function get_raw_data()
-  if not initialized then
-    os.execute(COMMAND_SETUP_UART)
-    initialized = true
-  end
-  os.execute(COMMAND_UART_TO_TMP_FILE)
-  local f = io.open(TMP_FILE, "r")
-  local raw_data = f :read('*a')
-  f :close()
-  return raw_data
+  return uart:read(400)
 end
 {% endhighlight %}
-
-(Notice that the exchange file is in `/tmp/`, hence on a tmpfs volume
-that's never written on the SD card: those cards only accept a
-finite number of erase/rewrite cycles).
 
 Now, we can extract a sequence of two frames out of that raw
 data. Indeed, the BMV keeps both instant informations about the
@@ -241,7 +228,7 @@ line, as a series of `"<label>\t<value>"` lines; the last line of a
 frame always has `"Checksum"` as a label.
 
 {% highlight lua %}
-function get_frame()
+function get_two_frames()
   local REGEXP = '\13\10Checksum\t.()'
   local raw_data = get_raw_data()
   local checksums = { }
@@ -259,7 +246,7 @@ end
 {% endhighlight %}
 
 Checking the frames for data corruption is fairly easy: the value
-associated with Checksum is an 8-bits ASCII byte chosen so that the
+associated with `Checksum` is an 8-bits ASCII byte chosen so that the
 sum of all bytes in the frame is a multiple of 256.
 
 {% highlight lua %}
@@ -276,7 +263,7 @@ records, that will be easily exploited by the rest of the program:
 
 {% highlight lua %}
 function get_record()
-  local frame = get_frame()
+  local frame = get_two_frames()
   local record = { }
   for line in frame :gmatch "[^\10\13]+" do
     local label, value = line :match '(..-)\t(.+)'
@@ -288,7 +275,7 @@ function get_record()
 end
 {% endhighlight %}
 
-[The actual code](https://github.com/fab13n/elorn_energy/tree/1c3a9ec/src/victron/bmv.lua)
+[The actual code](https://github.com/fab13n/elorn_energy/blob/master/src/victron/ve-direct.lua)
 is slightly more sophisticated: error checking, some data conversion
 and a mutex, but the 4 functions above are indeed the core of my BMV
 data acquisition system.
@@ -389,9 +376,10 @@ The code outlined here was quick and dirty on purpose, to minimize the
 amount of code not directly addressing the issues. I've put the
 resulting program
 [in a gist](https://gist.github.com/fab13n/25ac23c01a03e4a656fa)
+_[TODO: code needs to be updated]_
 anyway, but you shouldn't reuse that. A much more proper version is
 available
-[on github](https://github.com/fab13n/elorn_energy/tree/1c3a9ec99),
+[on github](https://github.com/fab13n/elorn_energy),
 with decent error checking and a somewhat more polished API.
 
 Moreover, my
