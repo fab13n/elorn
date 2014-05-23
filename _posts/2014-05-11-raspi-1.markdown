@@ -376,7 +376,6 @@ The code outlined here was quick and dirty on purpose, to minimize the
 amount of code not directly addressing the issues. I've put the
 resulting program
 [in a gist](https://gist.github.com/fab13n/25ac23c01a03e4a656fa)
-_[TODO: code needs to be updated]_
 anyway, but you shouldn't reuse that. A much more proper version is
 available
 [on github](https://github.com/fab13n/elorn_energy),

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Into the wild!"
+title:  "[FR] Into the wild!"
 date:   2014-05-21 12:00:00
 categories: autonomie
 ---

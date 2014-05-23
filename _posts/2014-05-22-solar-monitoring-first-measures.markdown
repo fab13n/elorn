@@ -45,7 +45,7 @@ heater on photovoltaic electricity, as preposterous as it seems! 800W
 will heat 150l of water at about 4.5°C/hour.
 
 I currently haven't found a way to setup an effective and good-looking
-solar water heater for much less than 3000€. Under similar sun
+solar water heater for much less than 2000€. Under similar sun
 conditions, a 4m2 heat panel would pump about 1.6kW, counting a
 reasonable 80% efficiency. That would produce about 9°C/h; starting
 from 20°C I'd boil my tank in two days... I'm glad I haven't rushed
