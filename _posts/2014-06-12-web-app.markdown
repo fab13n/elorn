@@ -1,0 +1,91 @@
+---
+layout: post
+title:  "[EN] A first web application"
+date:   2014-05-22 16:00:00
+categories: autonomie
+---
+
+In this post I'll describe a simple web application, which connects
+both to the controlling Raspberry Pi and to AirVantage servers.
+
+In a previous post, I've shown this diagram:
+
+![What ought to be measured]({{ site.baseurl }}/img/solar-diag-legend.png)
+
+Which is actually a cropped and tweaked version of this more
+comprehensive diagram:
+
+![Full electrical diagram]({{ site.baseurl }}/img/global-diag.png)
+ 
+My goal was to fill those red boxes not with legends, but with actual
+measures. So I integrated this image in a web page, and with a bit of
+CSS and and AJAX request, I gather the relevant data from the
+Raspberry and overlay them on the relevant part of the picture.
+
+Of course, it won't work unless I'm behind the same NAT as the
+Raspberry. As a next best thing, if the AJAX request to the Raspberry
+fails, I make a request to AirVantage, to retrieve the last valid
+value for each relevant field. All of this is done through a
+[JavaScript+jQuery script](https://github.com/fab13n/elorn_energy/blob/master/www/poll.js),
+loaded by an
+[HTML+CSS front-end](https://github.com/fab13n/elorn_energy/blob/master/www/index.html).
+Notice that this code will only work if you provide an
+[auth-airvantage.js file](https://github.com/fab13n/elorn_energy/blob/master/www/auth-airvantage.js)
+with valid AirVantage credentials.
+
+Serving AJAX requests from Mihini is rather straightforward, as a
+simple web server is embedded for that kind of service. The relevant
+code is to be found in
+[webpages.lua](https://github.com/fab13n/elorn_energy/blob/master/src/webpages.lua):
+
+{% highlight lua %}
+web.site['data.json'] = {
+    header=function(env)
+        env.response_headers['Access-Control-Allow-Origin']='*'
+    end,
+    content=function (echo, env)
+        local asset_name = require 'datalog.airvantage'.asset.id
+        local response = { }
+        for name, asset in pairs(assets) do
+            local prefix = asset_name..'.'..name..'.'
+            local record = asset :record(3)
+            for key, value in pairs(record) do
+                local line = '"'..prefix..key..'": "'..value..'"'
+                table.insert(response, line)
+            end
+        end
+        echo("{ "..table.concat(response, ',\n  ')..' }\n')
+    end
+}
+{% endhighlight %}
+
+Sending the request for this blob of JSON is also straightforward with
+an appropriate library. In
+[poll.js](https://github.com/fab13n/elorn_energy/blob/master/www/poll.js)
+I'm using jQuery:
+
+{% highlight javascript %}
+/* Data retrieval attempts will first be made here. Most likely,
+ * it will only work behind the firewall. */
+var raspi_url = "http://"+window.location.hostname+":9001/data.json"
+
+/* Try to get a data record straight from the Raspberry. Upon failure,
+ * tries to contact AirVantage instead. */
+function refresh() {
+    $.getJSON(raspi_url)
+	.success(parse_raspi_data)
+	.fail(refresh_av)
+}
+
+/* Got Raspi data; reformat and insert in the HTML. */
+function parse_raspi_data(record) {
+    // Parsing Raspberry data
+}
+
+/* Can't get data from Raspberry.
+ * If there's an AV access token, retrieve data from AV.
+ * If there isn't, load the password and request one first. */
+function refresh_av() {
+    // Request AirVantage data
+}
+{% endhighlight %}
